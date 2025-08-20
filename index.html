@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convite Especial 💌</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="ceu">
+    <div class="lua"></div>
+    <div id="estrelas-container"></div>
+  </div>
+
+  <div class="envelope-container">
+    <div class="envelope" id="envelope">
+      <div class="front"></div>
+      <div class="back"></div>
+      <button id="open-envelope" class="fade-in-button">Abrir Carta 💖</button>
+    </div>
+    
+    <div id="rosa-container">
+      <img src="rosa.png" alt="Uma rosa" id="rosa">
+    </div>
+
+    <div class="carta-container" id="cartaContainer">
+      <div class="carta">
+        <h2>💌 Convite Especial</h2>
+        <p>Oi! 😘</p>
+        <p>
+          Me envie sua resposta por mensagem!
+        </p>
+        <p>
+          Gostaria de te convidar para nosso primeiro encontro oficial, cheio de risadas, conversas gostosas e momentos especiais. ✨
+        </p>
+        <p>Topa?</p>
+
+        <div class="buttons">
+          <button id="btn-sim">Sim &#x1F496;</button>
+          <button id="btn-claro">Claro &#x1F60D;</button>
+        </div>
+
+        <p class="assinatura">Com carinho de , <br>[ César ]</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="coracoes-container"></div>
+
+  <div id="mensagem-enviada" class="mensagem-enviada">
+    <p>Carta Enviada!</p>
+    <p>💌</p>
+  </div>
+  
+  <audio id="musica-fundo" src="seu-astral.mp3" preload="auto" loop></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>

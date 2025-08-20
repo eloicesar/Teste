@@ -1,0 +1,344 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    background-color: #0b0c2a;
+    position: relative;
+}
+
+/* Fundo com lua e estrelas */
+.ceu {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -2;
+}
+
+.lua {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle at 30px 30px, #fff, #ccc);
+    border-radius: 50%;
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.8), 0 0 80px rgba(255, 255, 255, 0.4);
+    z-index: -1;
+}
+
+/* Estrelas animadas */
+.estrela {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: piscar 3s infinite alternate;
+}
+
+@keyframes piscar {
+    0% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0.3; transform: scale(0.8); }
+}
+
+/* Envelope */
+.envelope-container {
+    position: relative;
+    width: 280px;
+    height: 180px;
+    perspective: 1000px;
+    z-index: 1;
+}
+
+.envelope {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #ffb6c1;
+    border-radius: 12px;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    animation: flutuar 2s infinite ease-in-out alternate;
+}
+
+@keyframes flutuar {
+    0% { transform: translateY(0) rotateX(0deg); }
+    50% { transform: translateY(-10px) rotateX(5deg); }
+    100% { transform: translateY(0) rotateX(0deg); }
+}
+
+.envelope.open {
+    transform: rotateX(180deg);
+    animation: none;
+}
+
+.front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #ff69b4;
+    border-radius: 12px;
+    transform-origin: top;
+    backface-visibility: hidden;
+}
+
+.front::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    left: 0;
+    border-left: 140px solid transparent;
+    border-right: 140px solid transparent;
+    border-bottom: 30px solid #ff1493;
+}
+
+.back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #ffb6c1;
+    border-radius: 12px;
+    transform: rotateX(180deg);
+}
+
+#open-envelope {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+    z-index: 3;
+    padding: 10px 20px;
+    background-color: #ff1493;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    animation: fade-in-scale 1s 2s forwards;
+}
+
+@keyframes fade-in-scale {
+    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+#open-envelope:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Rosa que aparece */
+#rosa-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+    z-index: 2;
+}
+
+.envelope.open + #rosa-container {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+#rosa {
+    width: 80px;
+    height: auto;
+    display: block;
+}
+
+/* Carta horizontal */
+.carta-container {
+    position: absolute;
+    width: 500px;
+    height: 250px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%) translateY(20px);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+    z-index: 10;
+}
+
+.carta-container.show-carta {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) translateY(0);
+}
+
+.carta {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 25px 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    overflow-wrap: break-word;
+    font-family: 'Playfair Display', serif;
+}
+
+.carta h2 {
+    color: #ff1493;
+    margin-top: 0;
+    text-align: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.buttons button {
+    margin: 0 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #ff69b4;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 5px rgba(255, 20, 147, 0.5);
+    animation: button-pulse 1.5s infinite alternate;
+}
+
+.buttons button:hover {
+    transform: scale(1.1);
+    background-color: #ff1493;
+    box-shadow: 0 0 15px #ff1493;
+    animation-play-state: paused;
+}
+
+.buttons button:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 5px #ff1493;
+}
+
+@keyframes button-pulse {
+    0% { box-shadow: 0 0 5px rgba(255, 20, 147, 0.5); }
+    100% { box-shadow: 0 0 15px rgba(255, 20, 147, 0.8); }
+}
+
+.assinatura {
+    margin-top: 25px;
+    font-family: 'Dancing Script', cursive;
+    font-weight: bold;
+    font-size: 28px;
+    text-align: right;
+    margin-right: 10px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Estilo para a instrução de resposta */
+.instrucao-resposta {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #ff69b4;
+    font-style: italic;
+}
+
+/* Corações voando para cima (geração contínua) */
+.coracao {
+    position: absolute;
+    font-size: 20px;
+    color: #ff1493;
+    animation: voar 2s forwards;
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes voar {
+    0% { transform: translateY(0) scale(0); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-200px) scale(1.5); opacity: 0; }
+}
+
+/* Corações da explosão tipo Instagram */
+.coracao-grande {
+    position: absolute;
+    font-size: 40px;
+    animation: explosao-grande 1.5s forwards;
+    pointer-events: none;
+}
+
+@keyframes explosao-grande {
+    0% {
+        transform: scale(0.5);
+        opacity: 0.9;
+    }
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+/* Mensagem de carta enviada */
+.mensagem-enviada {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px 50px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    font-size: 24px;
+    color: #ff1493;
+    opacity: 0;
+    z-index: 11;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.mensagem-enviada.show {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 600px) {
+  .envelope-container {
+    width: 250px;
+    height: 160px;
+  }
+  .carta-container {
+    width: 90vw;
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .carta h2 {
+    font-size: 20px;
+  }
+  .carta p {
+    font-size: 14px;
+  }
+  .buttons button {
+    padding: 10px 15px;
+    font-size: 16px;
+    margin: 0 10px;
+  }
+  .assinatura {
+    font-size: 20px;
+    margin-top: 15px;
+  }
+  #rosa {
+    width: 60px;
+  }
+  .instrucao-resposta {
+    font-size: 14px;
+    margin-top: 15px;
+  }
+}

@@ -121,7 +121,7 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: transform 0.3s ease, opacity 0.3s ease;
-    animation: fade-in-scale 1s 2s forwards;
+    animation: fade-in-scale 1s 2s forwards, flutuar-botao 1.5s infinite ease-in-out alternate 2s;
 }
 
 @keyframes fade-in-scale {
@@ -129,30 +129,13 @@ body {
     100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
 }
 
+@keyframes flutuar-botao {
+    0% { transform: translate(-50%, -50%) scale(1) translateY(0px); }
+    100% { transform: translate(-50%, -50%) scale(1.05) translateY(-5px); }
+}
+
 #open-envelope:hover {
     transform: translate(-50%, -50%) scale(1.1);
-}
-
-/* Rosa que aparece */
-#rosa-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
-    z-index: 2;
-}
-
-.envelope.open + #rosa-container {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-}
-
-#rosa {
-    width: 80px;
-    height: auto;
-    display: block;
 }
 
 /* Carta horizontal */
@@ -185,6 +168,11 @@ body {
     height: 100%;
     overflow-wrap: break-word;
     font-family: 'Playfair Display', serif;
+}
+
+.carta h2, .carta p, .buttons, .assinatura {
+    opacity: 0;
+    animation: fade-in 1s forwards 0.8s;
 }
 
 .carta h2 {
@@ -241,14 +229,6 @@ body {
     text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
-/* Estilo para a instrução de resposta */
-.instrucao-resposta {
-    margin-top: 20px;
-    font-size: 16px;
-    color: #ff69b4;
-    font-style: italic;
-}
-
 /* Corações voando para cima (geração contínua) */
 .coracao {
     position: absolute;
@@ -257,6 +237,7 @@ body {
     animation: voar 2s forwards;
     opacity: 0;
     pointer-events: none;
+    text-shadow: 0 0 5px rgba(255, 20, 147, 0.7);
 }
 
 @keyframes voar {
@@ -271,6 +252,7 @@ body {
     font-size: 40px;
     animation: explosao-grande 1.5s forwards;
     pointer-events: none;
+    text-shadow: 0 0 10px rgba(255, 20, 147, 0.8);
 }
 
 @keyframes explosao-grande {
@@ -332,13 +314,6 @@ body {
   }
   .assinatura {
     font-size: 20px;
-    margin-top: 15px;
-  }
-  #rosa {
-    width: 60px;
-  }
-  .instrucao-resposta {
-    font-size: 14px;
     margin-top: 15px;
   }
 }
